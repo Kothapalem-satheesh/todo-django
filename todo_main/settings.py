@@ -1,3 +1,5 @@
+
+
 """
 Django settings for todo_main project.
 
@@ -55,12 +57,13 @@ ROOT_URLCONF = 'todo_main.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [BASE_DIR / 'templates'],  # Updated to use BASE_DIR
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',  # Important for auth
+                'django.contrib.auth.context_processors.auth',  # Important for auth
                 'django.contrib.messages.context_processors.messages',
             ],
         },
@@ -90,6 +93,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 8,
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -116,3 +122,25 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",  # If you have a static folder
+]
+
+# Default primary key field type
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# ============ AUTHENTICATION SETTINGS ============
+
+# Authentication settings
+LOGIN_URL = 'login'  # URL name for login page
+LOGIN_REDIRECT_URL = 'home'  # URL name to redirect after successful login
+LOGOUT_REDIRECT_URL = 'login'  # URL name to redirect after logout
+
+# For development only - remove in production
+if DEBUG:
+    # This allows you to see the login form errors
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    
+# Session settings
+SESSION_COOKIE_AGE = 1209600  # 2 weeks in seconds
+SESSION_SAVE_EVERY_REQUEST = True

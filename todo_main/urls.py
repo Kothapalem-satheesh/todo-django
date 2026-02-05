@@ -14,20 +14,29 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+
+# urls.py
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path, include
+from django.contrib.auth import views as auth_views
+from django.views.generic.base import RedirectView
 from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.home,name='home'),
     
+    # Redirect root URL to login page
+    path('', RedirectView.as_view(pattern_name='login', permanent=False)),
     
-    #path for tasks todo
-    path('todo/',include('todo.urls'))
+    # Authentication URLs
+    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
+    path('register/', views.register, name='register'),
     
+    # Home page (protected - requires login)
+    path('home/', views.home, name='home'),
+    
+    # Include todo app URLs
+    path('todo/', include('todo.urls')),
 ]
-
-
-
-
