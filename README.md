@@ -238,3 +238,11 @@ python manage.py test ToDo
 4. Push
 5. Pull Request
 
+
+##Screenshots
+<img width="960" height="571" alt="image" src="https://github.com/user-attachments/assets/086e936b-76c6-4ae8-a846-a2a50a8a6bba" />
+<img width="960" height="570" alt="image" src="https://github.com/user-attachments/assets/7a22c0d5-477b-4607-8963-96743f104d06" />
+<img width="957" height="574" alt="image" src="https://github.com/user-attachments/assets/bf084ce9-dbbd-4857-a2fb-dd3c0ca360e4" />
+<img width="960" height="572" alt="image" src="https://github.com/user-attachments/assets/b3d66017-1ddc-44ac-96d7-4acebf479f79" />
+
+
